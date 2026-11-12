@@ -64,7 +64,8 @@ NSString *appStoreURL = nil;
             NSUInteger resultCount = [jsonResults[@"resultCount"] integerValue];
             if (resultCount > 0) {
                 NSDictionary *appDetails = [jsonResults[@"results"] firstObject];
-                NSString *appItunesUrl = [appDetails[@"trackViewUrl"] replacingOccurrencesOfString:@"&uo=4" withString:@""];
+                NSString *trackViewUrl = (NSString *)appDetails[@"trackViewUrl"];
+                NSString *appItunesUrl = [trackViewUrl stringByReplacingOccurrencesOfString:@"&uo=4" withString:@""];
                 NSString *latestVersion = appDetails[@"version"];
                 NSString *currentVersionReleaseDate = appDetails[@"currentVersionReleaseDate"];
                 NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -104,8 +105,10 @@ NSString *appStoreURL = nil;
     if (foundWindow && foundWindow.rootViewController) {
         NSString *versionStr = self.version ?: @"";
         NSString *appNameStr = self.appName ?: @"";
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__version__" withString:versionStr];
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__appName__" withString:appNameStr];
+        NSMutableString *msg = [NSMutableString stringWithString:self.alertMessage];
+        [msg replaceOccurrencesOfString:@"__version__" withString:versionStr options:0 range:NSMakeRange(0, msg.length)];
+        [msg replaceOccurrencesOfString:@"__appName__" withString:appNameStr options:0 range:NSMakeRange(0, msg.length)];
+        self.alertMessage = msg;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.alertTitle message:self.alertMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *updateAction = [UIAlertAction actionWithTitle:self.alertUpdateButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL] options:@{} completionHandler:nil];
