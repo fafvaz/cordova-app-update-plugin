@@ -1,4 +1,5 @@
 #import "UpdatePlugin.h"
+#import <Foundation/Foundation.h>
 #import <Cordova/CDVPlugin.h>
 #import "SystemConfiguration/SystemConfiguration.h"
 
@@ -63,7 +64,8 @@ NSString *appStoreURL = nil;
             NSUInteger resultCount = [jsonResults[@"resultCount"] integerValue];
             if (resultCount > 0) {
                 NSDictionary *appDetails = [jsonResults[@"results"] firstObject];
-                NSString *appItunesUrl = [appDetails[@"trackViewUrl"] replacingOccurrencesOfString:@"&uo=4" withString:@""];
+                NSString *trackViewUrl = appDetails[@"trackViewUrl"];
+                NSString *appItunesUrl = [trackViewUrl replacingOccurrencesOfString:@"&uo=4" withString:@""];
                 NSString *latestVersion = appDetails[@"version"];
                 NSString *currentVersionReleaseDate = appDetails[@"currentVersionReleaseDate"];
                 NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -101,8 +103,8 @@ NSString *appStoreURL = nil;
         }
     }
     if (foundWindow && foundWindow.rootViewController) {
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__version__" withString:self.version ?: @""];
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__appName__" withString:self.appName ?: @""];
+        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__version__" withString:(self.version ?: @""];
+        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__appName__" withString:(self.appName ?: @""];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.alertTitle message:self.alertMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *updateAction = [UIAlertAction actionWithTitle:self.alertUpdateButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL] options:@{} completionHandler:nil];
