@@ -1,4 +1,4 @@
-﻿package com.mrspark.cordova.plugin;
+package com.mrspark.cordova.plugin;
 
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.gms.tasks.Task;

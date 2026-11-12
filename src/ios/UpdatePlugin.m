@@ -1,4 +1,4 @@
-﻿#import "UpdatePlugin.h"
+#import "UpdatePlugin.h"
 #import <Cordova/CDVPlugin.h>
 #import "SystemConfiguration/SystemConfiguration.h"
 
@@ -101,8 +101,8 @@ NSString *appStoreURL = nil;
         }
     }
     if (foundWindow && foundWindow.rootViewController) {
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__version__" withString:self.version ?? @""];
-        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__appName__" withString:self.appName ?? @""];
+        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__version__" withString:self.version ?: @""];
+        self.alertMessage = [self.alertMessage replacingOccurrencesOfString:@"__appName__" withString:self.appName ?: @""];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.alertTitle message:self.alertMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *updateAction = [UIAlertAction actionWithTitle:self.alertUpdateButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appStoreURL] options:@{} completionHandler:nil];

@@ -1,4 +1,4 @@
-﻿android {
+android {
     compileSdkVersion 33
     defaultConfig {
         targetSdkVersion 33
