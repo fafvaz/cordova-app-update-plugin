@@ -24,7 +24,7 @@
                 <param name="android-package" value="com.mrspark.cordova.plugin.UpdatePlugin"/>
             </feature>
         </config-file>
-        <framework src="com.google.android.play:app-update:2.8.0" />
+        <framework src="com.google.android.play:app-update:2.1.0" />
         <framework src="com.google.android.material:material:1.9.0" />
          <!-- edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="merge">
             <activity android:name="MainActivity" android:theme="@style/Theme.AppCompat.NoActionBar" />
