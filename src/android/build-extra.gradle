@@ -1,7 +1,7 @@
-android {
-    compileSdkVersion 34
+﻿android {
+    compileSdkVersion 33
     defaultConfig {
-        targetSdkVersion 34
+        targetSdkVersion 33
     }
 }
 
@@ -10,10 +10,12 @@ allprojects {
         maven {
             url "https://maven.google.com"
         }
+        google()
+        mavenCentral()
     }
 }
 
 dependencies {
-    implementation 'com.google.android.play:app-update:2.1.0'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.play:app-update:2.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
 }

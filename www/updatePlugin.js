@@ -19,7 +19,7 @@ function validateConfig(config, platform) {
     const error = new Error(
       `Unknown type ${config.type} for platform ${platform} in config`
     );
-    error.prototype.name = "UNKNOWN_TYPE_ERROR";
+    error.name = "UNKNOWN_TYPE_ERROR";
     throw error;
   }
 
